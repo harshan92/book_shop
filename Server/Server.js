@@ -1,7 +1,17 @@
+var express=require('express');
 var http = require('http');
-let server=http.createServer((req, res, next)=>{
-    res.write("Hello World!");
-    res.end();
-});
+var bodyParser=require('body-parser');
 
-server.listen(process.env.PORT || 3000);
+var app=express();
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+app.get('/', (req, res)=>{
+    res.send("Hello World!");
+})
+
+
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Server running...");
+});
